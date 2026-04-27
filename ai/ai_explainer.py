@@ -12,7 +12,7 @@ def explain(user_code: str, measured_complexity: str, static_prediction: str):
             f"Please explain why they differ — this is the most important part."
         )
     else:
-        disagreement_note = ""
+        disagreement_note = "" 
 
     prompt = f"""You are an algorithm complexity explainer. A student has written the following Python function:
                 ```python

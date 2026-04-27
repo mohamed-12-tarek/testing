@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SYSTEM_PROMPT = """You are an expert Algorithm Optimization Assistant inside the AlgoSmith application.
+SYSTEM_PROMPT = """You are an expert Algorithm Optimization Assistant inside the AlgoSmith application. 
 Your job is to analyze the user's Python function and determine whether it can be optimized for better time complexity.
 You must follow these rules strictly:
 

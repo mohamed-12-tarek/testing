@@ -8,7 +8,8 @@ import inspect
 sys.path.insert(0, os.path.dirname(__file__))
 from analyzer_fit import PerformanceAnalyzer
 
-TIMEOUT_SECONDS = 5
+TIMEOUT_SECONDS = 1.0
+MAX_BENCHMARK_SECONDS = 4.0
 
 def _run_with_timeout(func, args, results, index):
     """Run func(*args), store elapsed time in results[index]. Used for threading."""
@@ -93,9 +94,9 @@ def get_performance_report(code_string):
     Measures best, avg, and worst case times for array-based functions.
     """
     try:
-        local_env = {}
-        exec(compile(code_string, '<user_code>', 'exec'), {}, local_env)
-        func = next((v for v in local_env.values() if callable(v)), None)
+        exec_env = {}
+        exec(compile(code_string, '<user_code>', 'exec'), exec_env, exec_env)
+        func = next((v for v in exec_env.values() if callable(v)), None)
 
         if not func:
             return {"error": "No callable function found in your code."}
@@ -107,11 +108,18 @@ def get_performance_report(code_string):
         if _should_cap_sizes(func):
             sizes = [5, 7, 10, 12, 15, 18, 20]
         
+        measured_sizes = []
         times_best = []
         times_avg = []
         times_worst = []
 
+        benchmark_start = time.perf_counter()
         for n in sizes:
+            if time.perf_counter() - benchmark_start > MAX_BENCHMARK_SECONDS:
+                break
+
+            measured_sizes.append(n)
+
             # Best case
             result_best = [None]
             args_best = _generate_input(func, n, 'best')
@@ -143,14 +151,14 @@ def get_performance_report(code_string):
         if all(t == 0.0 for t in times_avg):
             return {"error": "All runs timed out or returned zero. Try a slower algorithm or check your code."}
 
-        analysis_results = analyzer.fit_and_analyze(sizes, times_avg)
+        analysis_results = analyzer.fit_and_analyze(measured_sizes, times_avg)
 
         return {
             "detected":   analysis_results[0]["label"],
             "confidence": analysis_results[0]["confidence"],
             "ranking":    analysis_results,
             "raw_data":   {
-                "sizes": sizes,
+                "sizes": measured_sizes,
                 "times_best": times_best,
                 "times_avg": times_avg,
                 "times_worst": times_worst

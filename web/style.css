@@ -578,3 +578,87 @@ button, select, input, textarea { font: inherit; }
     0%, 100% { opacity: 0.2; }
     50% { opacity: 1; }
 }
+
+
+.ai-tools {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.secondary-btn {
+    background: rgba(255,255,255,0.08);
+    color: var(--text1);
+}
+
+.professional-card {
+    margin-bottom: 12px;
+}
+
+.card-title {
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+}
+
+.card-body {
+    color: var(--text2);
+    line-height: 1.7;
+}
+
+.muted { color: var(--text3); }
+.success { color: #22c55e; }
+
+.bug-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 187, 90, 0.14);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+}
+
+.fix {
+    color: #f4b841;
+    margin-top: 4px;
+}
+
+.ai-main-tabs {
+    border-bottom: 1px solid rgba(255, 187, 90, 0.12);
+    background: linear-gradient(180deg, rgba(9,14,22,.95), rgba(9,14,22,.85));
+}
+
+.ai-main-tabs .tab {
+    padding: 12px 16px;
+    border-bottom: 2px solid transparent;
+    color: #e8d9b0;
+    font-weight: 600;
+}
+
+.ai-main-tabs .tab.active {
+    background: rgba(255, 187, 90, 0.12);
+    border-bottom-color: var(--accent);
+    border-radius: 8px 8px 0 0;
+}
+
+.professional-card {
+    border-radius: 10px;
+    border: 1px solid rgba(255, 187, 90, 0.2);
+    background: linear-gradient(180deg, rgba(10, 20, 31, 0.9), rgba(7, 15, 24, 0.85));
+    box-shadow: 0 8px 18px rgba(0,0,0,.2);
+}
+
+.card-title {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 11px;
+    border-bottom: 1px solid rgba(255, 187, 90, 0.12);
+    padding-bottom: 10px;
+}
+
+.card-body code {
+    background: rgba(255, 187, 90, 0.14);
+    border: 1px solid rgba(255, 187, 90, 0.25);
+    border-radius: 6px;
+    padding: 2px 6px;
+}

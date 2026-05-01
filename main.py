@@ -11,7 +11,7 @@ from bridge_fit import get_performance_report
 from bridge_static import get_code_analysis
 from ai_explainer import explain
 from optimizer import optimize
-
+from bug_detector import detect_bugs
 
 @eel.expose
 def run_algorithm(algorithm, code, input_data):
@@ -60,11 +60,20 @@ def run_algorithm(algorithm, code, input_data):
         "ranking":     ranking,
     }
 
+@eel.expose
+def scan_bugs(code):
+    if not code.strip():
+        return {"ok": False, "message": "No code provided.", "issues": []}
+    return detect_bugs(code)
 
 @eel.expose
 def get_optimization(code):
     if not code.strip():
         return "No code provided."
+    bug_report = detect_bugs(code)
+    if not bug_report.get("ok", False):
+        return "I can't optimize the code because it has bugs. Please fix the reported issues first."
+    
     try:
         return optimize(code)
     except Exception as e:

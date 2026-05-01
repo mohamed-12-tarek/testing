@@ -27,7 +27,11 @@ Static analysis predicted: {static_prediction}
 Measured complexity: {measured_complexity}
 {disagreement_note}
 
-Write two clearly labeled sections:
+Important Note:
+If the provided code contains bugs or errors, do NOT proceed with complexity explanation or optimization.
+Instead, respond with a clear message informing the user that the code has issues and must be fixed first using the Bug Detector section before analysis can be performed and don't tell the user where are the bugs only tell him that the code has issues and must be fixed first using the Bug Detector Firistly.
+
+Write two clearly labeled sections ONLY if the code is valid:
 
 COMPLEXITY EXPLANATION
 In 3-5 sentences: which operations drive the complexity, why they cost what they do, and one concrete suggestion to improve it.
